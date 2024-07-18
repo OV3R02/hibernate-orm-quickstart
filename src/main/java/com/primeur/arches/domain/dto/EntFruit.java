@@ -1,4 +1,4 @@
-package org.acme.hibernate.orm;
+package com.primeur.arches.domain.dto;
 
 import jakarta.persistence.Cacheable;
 import jakarta.persistence.Column;
@@ -12,9 +12,9 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "known_fruits")
-@NamedQuery(name = "Fruits.findAll", query = "SELECT f FROM Fruit f ORDER BY f.name", hints = @QueryHint(name = "org.hibernate.cacheable", value = "true"))
+@NamedQuery(name = "Fruits.findAll", query = "SELECT f FROM EntFruit f ORDER BY f.name", hints = @QueryHint(name = "org.hibernate.cacheable", value = "true"))
 @Cacheable
-public class Fruit {
+public class EntFruit {
 
     @Id
     @SequenceGenerator(name = "fruitsSequence", sequenceName = "known_fruits_id_seq", allocationSize = 1, initialValue = 10)
@@ -24,10 +24,10 @@ public class Fruit {
     @Column(length = 40, unique = true)
     private String name;
 
-    public Fruit() {
+    public EntFruit() {
     }
 
-    public Fruit(String name) {
+    public EntFruit(String name) {
         this.name = name;
     }
 
