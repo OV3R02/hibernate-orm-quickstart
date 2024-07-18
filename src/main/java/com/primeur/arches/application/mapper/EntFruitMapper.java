@@ -13,7 +13,7 @@ public class EntFruitMapper {
 
     private EntFruit convertEntity(VOFruit voFruit) {
         EntFruit fruit = new EntFruit();
-        entFruit.setName(fruit.getName());
+        fruit.setName(fruit.getName());
         return fruit;
     }
 
