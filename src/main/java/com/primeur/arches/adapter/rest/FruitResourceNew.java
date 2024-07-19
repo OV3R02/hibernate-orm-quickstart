@@ -1,5 +1,7 @@
 package com.primeur.arches.adapter.rest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.primeur.arches.application.vo.VOFruit;
 import com.primeur.arches.ports.FruitService;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -7,12 +9,9 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
-import java.util.List;
-import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import java.util.List;
 import static io.quarkus.arc.impl.UncaughtExceptions.LOGGER;
 
 @Path("fruits")
@@ -26,7 +25,8 @@ public class FruitResourceNew {
 
     @POST
     @Transactional
-    public Response create (VOFruit voFruit){
+    public Response create(VOFruit voFruit) {
+
         if (voFruit.getId() != null) {
             throw new WebApplicationException("Id was invalidly set on request. ", 422);
         }
@@ -36,8 +36,44 @@ public class FruitResourceNew {
 
     @GET
     public List<VOFruit> get() {
-        List<VOFruit> voFruitList = fruitService.get();
-        return voFruitList;
+        return fruitService.get();
+    }
+
+    @GET
+    @Path("{id}")
+    public VOFruit getSingle(String id) {
+        VOFruit voFruit = fruitService.getSingle(id);
+        if (voFruit.getId() == null) {
+            throw new WebApplicationException("Fruit with id of " + id + " does not exist.", 404);
+        }
+        return voFruit;
+    }
+
+    @PUT
+    @Path("{id}")
+    @Transactional
+    public VOFruit update(String id, VOFruit voFruit) {
+
+        if (voFruit.getName() == null) {
+            throw new WebApplicationException("Fruit Name was not set on request.", 422);
+        }
+        VOFruit newVoFruit = fruitService.update(voFruit, id);
+        if (newVoFruit == null) {
+            throw new WebApplicationException("Fruit with id of " + id + " does not exist.", 404);
+        }
+        return newVoFruit;
+    }
+
+
+    @DELETE
+    @Path("{id}")
+    @Transactional
+    public Response delete(String id) {
+        VOFruit voFruit = fruitService.delete(id);
+        if (voFruit == null) {
+            throw new WebApplicationException("Fruit with id of " + id + " does not exist.", 404);
+        }
+        return Response.status(204).build();
     }
 
 

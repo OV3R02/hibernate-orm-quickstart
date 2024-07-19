@@ -8,4 +8,7 @@ import java.util.List;
 public interface FruitService {
     VOFruit create(VOFruit voFruit);
     List<VOFruit> get();
+    VOFruit getSingle(String id);
+    VOFruit delete (String id);
+    VOFruit update (VOFruit voFruit, String id);
 }

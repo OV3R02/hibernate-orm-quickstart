@@ -8,12 +8,12 @@ public class EntFruitMapper {
     EntFruit entFruit;
 
     public EntFruitMapper(VOFruit voFruit) {
-        this.entFruit= convertEntity(voFruit);
+        this.entFruit = convertEntity(voFruit);
     }
 
     private EntFruit convertEntity(VOFruit voFruit) {
         EntFruit fruit = new EntFruit();
-        fruit.setName(fruit.getName());
+        fruit.setName(voFruit.getName());
         return fruit;
     }
 

@@ -16,11 +16,11 @@ public class VOFruitMapper {
     }
 
     private VOFruit convertVO(EntFruit entFruit) {
-        VOFruit voFruit1 = new VOFruit();
-        voFruit1.setName(entFruit.getName());
-        voFruit1.setId(""+entFruit.getId());
-        voFruit1.setDescription("description of "+entFruit.getName());
-        return voFruit1;
+        VOFruit newVOFruit = new VOFruit();
+        newVOFruit.setName(entFruit.getName());
+        newVOFruit.setId(""+entFruit.getId());
+        newVOFruit.setDescription("description of "+entFruit.getName());
+        return newVOFruit;
     }
 
 

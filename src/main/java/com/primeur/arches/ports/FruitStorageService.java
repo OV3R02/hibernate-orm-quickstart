@@ -8,4 +8,7 @@ public interface FruitStorageService {
 
     EntFruit create (EntFruit fruit);
     List<EntFruit> get();
+    EntFruit getSingle(Integer id);
+    EntFruit delete (Integer id);
+    EntFruit update (EntFruit entFruit, Integer id);
 }
