@@ -54,6 +54,7 @@ public class FruitResourceNew {
     @Transactional
     public VOFruit update(String id, VOFruit voFruit) {
 
+
         if (voFruit.getName() == null) {
             throw new WebApplicationException("Fruit Name was not set on request.", 422);
         }
