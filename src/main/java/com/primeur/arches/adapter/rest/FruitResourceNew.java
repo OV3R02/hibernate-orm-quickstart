@@ -2,6 +2,8 @@ package com.primeur.arches.adapter.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.primeur.arches.application.BOFruit;
+import com.primeur.arches.application.BOFruitException;
 import com.primeur.arches.application.vo.VOFruit;
 import com.primeur.arches.ports.FruitService;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -30,7 +32,8 @@ public class FruitResourceNew {
         if (voFruit.getId() != null) {
             throw new WebApplicationException("Id was invalidly set on request. ", 422);
         }
-        VOFruit voFruitSaved = fruitService.create(voFruit);
+        VOFruit voFruitSaved;
+        voFruitSaved = fruitService.create(voFruit);
         return Response.ok(voFruitSaved).status(201).build();
     }
 

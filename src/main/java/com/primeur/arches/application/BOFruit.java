@@ -8,11 +8,10 @@ import com.primeur.arches.ports.FruitService;
 import com.primeur.arches.ports.FruitStorageService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.WebApplicationException;
 
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @ApplicationScoped
 public class BOFruit implements FruitService {
@@ -23,9 +22,13 @@ public class BOFruit implements FruitService {
     @Override
     public VOFruit create(VOFruit voFruit) {
 
-        if (voFruit.getName() == "") {
-            throw new BOFruitException("Invalid name for fruit. Must not be blank.");
+        if (voFruit.getName() != null) {
+            voFruit.setId(null);
         }
+        if (Objects.equals(voFruit.getName(), "")) {
+            throw new BOFruitException("Invalid name for fruit. Name must not be blank.");
+        }
+
         EntFruitMapper entMapper = new EntFruitMapper(voFruit);
         EntFruit entFruit = fruitStorageService.create(entMapper.getEntity());
         VOFruitMapper voMapper = new VOFruitMapper(entFruit);
@@ -34,7 +37,11 @@ public class BOFruit implements FruitService {
 
     @Override
     public List<VOFruit> get() {
+
         List<EntFruit> entFruitsList = fruitStorageService.get();
+        if (entFruitsList.isEmpty()){
+            throw new BOFruitException("No fruits available!");
+        }
         List<VOFruit> voFruitList = new ArrayList<>();
         for (EntFruit entFruit : entFruitsList) {
             VOFruitMapper voFruitMapper = new VOFruitMapper(entFruit);
@@ -47,6 +54,9 @@ public class BOFruit implements FruitService {
     @Override
     public VOFruit getSingle(String id) {
         EntFruit entFruit = fruitStorageService.getSingle(getIdFromString(id));
+        if (entFruit.getId() == null){
+            throw new BOFruitException("No fruit found with id "+entFruit.getId()+"!");
+        }
         VOFruitMapper voMapper = new VOFruitMapper(entFruit);
         return voMapper.getEntity();
     }
