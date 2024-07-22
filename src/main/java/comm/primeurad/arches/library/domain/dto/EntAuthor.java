@@ -24,7 +24,7 @@ public class EntAuthor {
     @Column(length = 3, nullable = false)
     private Date birthdate;
 
-    @Column(length = 6, nullable = false)
+    @Column(length = 6)
     private String sex;
 
     @Column(length = 100, nullable = false)

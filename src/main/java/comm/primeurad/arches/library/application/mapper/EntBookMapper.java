@@ -2,6 +2,7 @@ package comm.primeurad.arches.library.application.mapper;
 
 import comm.primeurad.arches.library.application.vo.VOBook;
 import comm.primeurad.arches.library.domain.dto.EntBook;
+import jakarta.json.Json;
 
 import java.math.BigDecimal;
 
@@ -18,7 +19,7 @@ public class EntBookMapper {
         entBook.setPubHouse(voBook.getPub_house());
         entBook.setType(voBook.getType());
         entBook.setPrice(voBook.getPrice());
-        entBook.setEntAuthor(voBook.getVoAuthor());
+        entBook.setEntAuthor();
         return entBook;
     }
 

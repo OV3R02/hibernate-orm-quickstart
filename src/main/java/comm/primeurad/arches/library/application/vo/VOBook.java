@@ -1,7 +1,5 @@
 package comm.primeurad.arches.library.application.vo;
 
-import comm.primeurad.arches.library.domain.dto.EntAuthor;
-
 import java.math.BigDecimal;
 
 public class VOBook {
@@ -12,7 +10,7 @@ public class VOBook {
     private String type;
     private BigDecimal price;
     private String description;
-    private String voAuthor;
+    private String authorName;
 
     public VOBook() {
     }
@@ -65,11 +63,11 @@ public class VOBook {
         this.description = description;
     }
 
-    public String getVoAuthor() {
-        return voAuthor;
+    public String getAuthorName() {
+        return authorName;
     }
 
-    public void setVoAuthor(String voAuthor) {
-        this.voAuthor = voAuthor;
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
     }
 }

@@ -18,7 +18,7 @@ public class VOBookMapper {
         voBook1.setPub_house(entBook.getPubHouse());
         voBook1.setType(entBook.getType());
         voBook1.setPrice(entBook.getPrice());
-        voBook1.setVoAuthor(entBook.getEntAuthor().toString());
+        voBook1.setAuthorName(entBook.getEntAuthor().toString());
         return voBook1;
     }
 }
