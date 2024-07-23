@@ -1,6 +1,5 @@
 package comm.primeurad.arches.library.adapter.rest;
 
-import com.arjuna.ats.jta.exceptions.NotImplementedException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -12,7 +11,6 @@ import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
-
 import static io.quarkus.arc.impl.UncaughtExceptions.LOGGER;
 
 @Path("books")

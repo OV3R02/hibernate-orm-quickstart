@@ -2,6 +2,7 @@ package comm.primeurad.arches.library.domain.dto;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -22,7 +23,7 @@ public class EntAuthor {
     private String surname;
 
     @Column(length = 3, nullable = false)
-    private Date birthdate;
+    private LocalDate birthdate;
 
     @Column(length = 6)
     private String sex;
@@ -60,11 +61,11 @@ public class EntAuthor {
         this.surname = surname;
     }
 
-    public Date getBirthdate() {
+    public LocalDate getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(Date birthdate) {
+    public void setBirthdate(LocalDate birthdate) {
         this.birthdate = birthdate;
     }
 

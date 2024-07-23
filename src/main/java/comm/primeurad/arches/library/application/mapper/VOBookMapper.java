@@ -1,24 +1,26 @@
 package comm.primeurad.arches.library.application.mapper;
 
-import comm.primeurad.arches.library.application.vo.VOBook;
+import comm.primeurad.arches.library.application.vo.VOAuthorBook;
 import comm.primeurad.arches.library.domain.dto.EntBook;
-
-import java.math.BigDecimal;
 
 public class VOBookMapper {
 
+    private final VOAuthorBook voAuthorBook;
+
     public VOBookMapper(EntBook entBook) {
-        VOBook voBook = converted(entBook);
+        this.voAuthorBook = converted(entBook);
     }
 
-    public VOBook converted(EntBook entBook){
-        VOBook voBook1 = new VOBook();
-        voBook1.setId(String.valueOf(BigDecimal.valueOf(entBook.getId())));
-        voBook1.setTitle(entBook.getTitle());
-        voBook1.setPub_house(entBook.getPubHouse());
-        voBook1.setType(entBook.getType());
-        voBook1.setPrice(entBook.getPrice());
-        voBook1.setAuthorName(entBook.getEntAuthor().toString());
-        return voBook1;
+    public VOAuthorBook converted(EntBook entBook){
+        VOAuthorBook voAuthorBook = new VOAuthorBook();
+        voAuthorBook.setIdBook(String.valueOf(entBook.getId()));
+        voAuthorBook.setTitle(entBook.getTitle());
+        voAuthorBook.setPub_house(entBook.getPubHouse());
+        voAuthorBook.setPrice(entBook.getPrice());
+        voAuthorBook.setIdAuthor(String.valueOf(entBook.getEntAuthor().getId()));
+        return voAuthorBook;
     }
+
+    public VOAuthorBook getEntity(){ return this.voAuthorBook; }
+
 }
