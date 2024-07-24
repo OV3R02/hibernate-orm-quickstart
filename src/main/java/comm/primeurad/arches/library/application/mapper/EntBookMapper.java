@@ -7,19 +7,18 @@ public class EntBookMapper {
 
     private final EntBook entBook;
 
-    public EntBookMapper(VOAuthorBook voAuthorBook) {
-        this.entBook = converted(voAuthorBook);
+    public EntBookMapper(VOAuthorBook voBook) {
+        this.entBook = converted(voBook);
     }
 
-    public EntBook converted(VOAuthorBook voAuthorBook){
+    public EntBook converted(VOAuthorBook voBook){
         EntBook entBook = new EntBook();
-        EntAuthorMapper entAuthorMapper = new EntAuthorMapper(voAuthorBook);
-        entBook.setId(Integer.valueOf(voAuthorBook.getIdBook()));
-        entBook.setTitle(voAuthorBook.getTitle());
-        entBook.setPubHouse(voAuthorBook.getPub_house());
-        entBook.setType(voAuthorBook.getType());
-        entBook.setPrice(voAuthorBook.getPrice());
-        entBook.setEntAuthor(entAuthorMapper.getEntity());
+        entBook.setTitle(voBook.getTitle());
+        entBook.setPubHouse(voBook.getPub_house());
+        entBook.setType(voBook.getType());
+        entBook.setPrice(voBook.getPrice());
+        entBook.setEntAuthor();
+        //entBook.setEntAuthor(entAuthorMapper.getEntity());
         return entBook;
     }
 

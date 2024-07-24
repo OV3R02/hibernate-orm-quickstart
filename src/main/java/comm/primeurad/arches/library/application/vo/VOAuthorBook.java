@@ -14,6 +14,7 @@ public class VOAuthorBook {
     private String email;
     private String phoneNumber;
     private String idAuthor;
+    private String sex;
 
     // Variables of VOBook class
 
@@ -88,6 +89,14 @@ public class VOAuthorBook {
 
     public void setYear(String year) {
         this.year = year;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
     // getters and setters of VOBook class

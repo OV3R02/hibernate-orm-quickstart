@@ -3,16 +3,15 @@ package comm.primeurad.arches.library.domain.dto;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
-@Table(name = "known_books")
-@NamedQuery(name = "Authors.findAll", query = "SELECT a FROM EntAuthor a ORDER BY a.name", hints = @QueryHint(name = "org.hibernate.cacheable", value = "true"))
+@Table(name = "known_authors")
+@NamedQuery(name = "Author.findAll", query = "SELECT a FROM EntAuthor a ORDER BY a.name", hints = @QueryHint(name = "org.hibernate.cacheable", value = "true"))
 @Cacheable
 public class EntAuthor {
 
     @Id
-    @SequenceGenerator(name = "authorSequence", sequenceName = "known_author_id_seq", initialValue = 10, allocationSize = 1)
+    @SequenceGenerator(name = "authorSequence", sequenceName = "known_authors_id_seq", initialValue = 10, allocationSize = 1)
     @GeneratedValue(generator = "authorSequence")
     private Integer id;
 
@@ -33,6 +32,9 @@ public class EntAuthor {
 
     @Column(length = 13)
     private String number;
+
+   // @ManyToOne
+   // ArrayList<EntBook> entBooksList;
 
     public EntAuthor() {
     }

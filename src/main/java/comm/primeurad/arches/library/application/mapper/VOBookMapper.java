@@ -12,8 +12,11 @@ public class VOBookMapper {
     }
 
     public VOAuthorBook converted(EntBook entBook){
+         if (entBook==null){
+            throw new RuntimeException("No entBook found on mapper!");
+        }
         VOAuthorBook voAuthorBook = new VOAuthorBook();
-        voAuthorBook.setIdBook(String.valueOf(entBook.getId()));
+        voAuthorBook.setIdBook(IntegerConverter.convertFromIntegerToString(entBook.getId()));
         voAuthorBook.setTitle(entBook.getTitle());
         voAuthorBook.setPub_house(entBook.getPubHouse());
         voAuthorBook.setPrice(entBook.getPrice());
@@ -24,3 +27,4 @@ public class VOBookMapper {
     public VOAuthorBook getEntity(){ return this.voAuthorBook; }
 
 }
+

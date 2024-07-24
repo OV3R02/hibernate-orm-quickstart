@@ -1,6 +1,5 @@
 package comm.primeurad.arches.library.domain.dto;
 
-import jakarta.enterprise.context.RequestScoped;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -12,7 +11,7 @@ import java.math.BigDecimal;
 public class EntBook {
 
     @Id
-    @SequenceGenerator(name = "bookSequence", sequenceName = "known_fruits_id_seq", allocationSize = 1, initialValue = 10)
+    @SequenceGenerator(name = "bookSequence", sequenceName = "known_books_id_seq", allocationSize = 1, initialValue = 10)
     @GeneratedValue(generator = "bookSequence")
     private Integer id;
 
@@ -28,7 +27,9 @@ public class EntBook {
     @Column(length = 5, nullable = false)
     private BigDecimal price;
 
-    @JoinColumn(name = "id")
+    //@JoinColumn(name = "id")
+    //@OneToMany
+    @ManyToOne
     private EntAuthor entAuthor;
 
     public EntBook(){
