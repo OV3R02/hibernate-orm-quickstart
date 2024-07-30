@@ -8,10 +8,12 @@ import com.primeur.arches.ports.FruitService;
 import com.primeur.arches.ports.FruitStorageService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import org.hibernate.HibernateException;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @ApplicationScoped
 public class BOFruit implements FruitService {
@@ -22,13 +24,12 @@ public class BOFruit implements FruitService {
     @Override
     public VOFruit create(VOFruit voFruit) {
 
-        if (voFruit.getName() != null) {
-            voFruit.setId(null);
+        if (voFruit.getId() != null) {
+            throw new BOFruitException("voFruit id must be null.");
         }
-        if (Objects.equals(voFruit.getName(), "")) {
-            throw new BOFruitException("Invalid name for fruit. Name must not be blank.");
+        if (voFruit.getName() == null || voFruit.getName().isBlank()) {
+            throw new BOFruitException("Invalid name for fruit. Name must not be null, empty or blank");
         }
-
         EntFruitMapper entMapper = new EntFruitMapper(voFruit);
         EntFruit entFruit = fruitStorageService.create(entMapper.getEntity());
         VOFruitMapper voMapper = new VOFruitMapper(entFruit);
@@ -37,11 +38,7 @@ public class BOFruit implements FruitService {
 
     @Override
     public List<VOFruit> get() {
-
         List<EntFruit> entFruitsList = fruitStorageService.get();
-        if (entFruitsList.isEmpty()){
-            throw new BOFruitException("No fruits available!");
-        }
         List<VOFruit> voFruitList = new ArrayList<>();
         for (EntFruit entFruit : entFruitsList) {
             VOFruitMapper voFruitMapper = new VOFruitMapper(entFruit);
@@ -52,36 +49,37 @@ public class BOFruit implements FruitService {
     }
 
     @Override
-    public VOFruit getSingle(String id) {
-        EntFruit entFruit = fruitStorageService.getSingle(getIdFromString(id));
-        if (entFruit.getId() == null){
-            throw new BOFruitException("No fruit found with id "+entFruit.getId()+"!");
+    public Optional<VOFruit> getSingle(String id) {
+        if (id == null || id.isBlank()){
+            throw new BOFruitException("Id must not be empty, blank or null");
         }
-        VOFruitMapper voMapper = new VOFruitMapper(entFruit);
-        return voMapper.getEntity();
-    }
-
-    @Override
-    public VOFruit delete(String id) {
-        EntFruit entFruit = fruitStorageService.delete(getIdFromString(id));
-        VOFruitMapper voMapper = new VOFruitMapper(entFruit);
-        return voMapper.getEntity();
+        Optional<EntFruit> single = fruitStorageService.getSingle(getIdFromString(id));
+        return single.isPresent() ? single.map(b -> new VOFruitMapper(b).getEntity()) : Optional.empty();
     }
 
     @Override
     public VOFruit update(VOFruit voFruit, String id) {
+        if (id == null || id.isBlank()){
+            throw new BOFruitException("Invalid id for Fruit, mus not be blank, empty or null");
+        }
         EntFruitMapper entFruitMapper = new EntFruitMapper(voFruit);
-        EntFruit entFruit = fruitStorageService.update(entFruitMapper.getEntity(), getIdFromString(id));
-        VOFruitMapper voFruitMapper = new VOFruitMapper(entFruit);
+        EntFruit entFruit = entFruitMapper.getEntity();
+        EntFruit newEntFruit = fruitStorageService.update(entFruit, getIdFromString(id));
+        VOFruitMapper voFruitMapper = new VOFruitMapper(newEntFruit);
         return voFruitMapper.getEntity();
     }
 
+    @Override
+    public void delete(String id) {
+        if (id == null || id.isBlank()) {
+            throw new BOFruitException("Id must not be blank, empty or null");
+        }
+        EntFruit entFruitFound = fruitStorageService.getSingle(getIdFromString(id))
+                .orElseThrow(() -> new BOFruitException("No fruit found with id: "+id));
+        fruitStorageService.delete(entFruitFound);
+    }
 
     public int getIdFromString(String id){
         return Integer.parseInt(id);
-    }
-
-    public String getIdFromInt(int id){
-        return String.valueOf(id);
     }
 }

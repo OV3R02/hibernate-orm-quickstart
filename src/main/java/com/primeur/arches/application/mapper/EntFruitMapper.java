@@ -8,6 +8,9 @@ public class EntFruitMapper {
     EntFruit entFruit;
 
     public EntFruitMapper(VOFruit voFruit) {
+        if (voFruit == null) {
+        throw new IllegalArgumentException("voFruit cannot be null");
+    }
         this.entFruit = convertEntity(voFruit);
     }
 

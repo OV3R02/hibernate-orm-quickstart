@@ -1,14 +1,14 @@
 package com.primeur.arches.ports;
 
 import com.primeur.arches.application.vo.VOFruit;
-import com.primeur.arches.domain.dto.EntFruit;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface FruitService {
     VOFruit create(VOFruit voFruit);
     List<VOFruit> get();
-    VOFruit getSingle(String id);
-    VOFruit delete (String id);
+    Optional<VOFruit> getSingle(String id);
+    void delete (String id);
     VOFruit update (VOFruit voFruit, String id);
 }

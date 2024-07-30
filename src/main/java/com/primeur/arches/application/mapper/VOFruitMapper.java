@@ -1,11 +1,7 @@
 package com.primeur.arches.application.mapper;
 
-import com.primeur.arches.application.vo.VOFruit;
 import com.primeur.arches.domain.dto.EntFruit;
-import jakarta.enterprise.context.RequestScoped;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.primeur.arches.application.vo.VOFruit;
 
 public class VOFruitMapper {
 
