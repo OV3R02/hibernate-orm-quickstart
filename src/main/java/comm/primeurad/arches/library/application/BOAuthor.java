@@ -1,10 +1,9 @@
 package comm.primeurad.arches.library.application;
 
 import comm.primeurad.arches.library.application.mapper.EntAuthorMapper;
-import comm.primeurad.arches.library.application.mapper.IntegerConverter;
 import comm.primeurad.arches.library.application.mapper.StringConverter;
 import comm.primeurad.arches.library.application.mapper.VOAuthorMapper;
-import comm.primeurad.arches.library.application.vo.VOAuthorBook;
+import comm.primeurad.arches.library.application.vo.VOAuthor;
 import comm.primeurad.arches.library.domain.dto.EntAuthor;
 import comm.primeurad.arches.library.ports.AuthorService;
 import comm.primeurad.arches.library.ports.AuthorStorageService;
@@ -21,7 +20,7 @@ public class BOAuthor implements AuthorService {
     AuthorStorageService authorStorageService;
 
     @Override
-    public VOAuthorBook create(VOAuthorBook voAuthorBook) {
+    public VOAuthor create(VOAuthor voAuthorBook) {
         EntAuthorMapper entAuthorMapper = new EntAuthorMapper(voAuthorBook);
         EntAuthor entAuthor = entAuthorMapper.getEntity();
         authorStorageService.create(entAuthor);
@@ -30,9 +29,9 @@ public class BOAuthor implements AuthorService {
     }
 
     @Override
-    public List<VOAuthorBook> getAll() {
+    public List<VOAuthor> getAll() {
         List<EntAuthor> allBooks = authorStorageService.getAll();
-        List<VOAuthorBook> voBooksList = new ArrayList<>();
+        List<VOAuthor> voBooksList = new ArrayList<>();
 
         for (int i = 0; i < allBooks.size(); i++) {
             EntAuthor EntAuthor = allBooks.get(i);
@@ -43,7 +42,7 @@ public class BOAuthor implements AuthorService {
     }
 
     @Override
-    public VOAuthorBook getSingle(String id) {
+    public VOAuthor getSingle(String id) {
         EntAuthor singleAuthor = authorStorageService.getSingle(
                 StringConverter.convertFromStringToInteger(id));
         VOAuthorMapper voAuthorMapper = new VOAuthorMapper(singleAuthor);
@@ -51,7 +50,7 @@ public class BOAuthor implements AuthorService {
     }
 
     @Override
-    public VOAuthorBook update(VOAuthorBook voAuthorBook, String id) {
+    public VOAuthor update(VOAuthor voAuthorBook, String id) {
         EntAuthorMapper EntAuthorMapper = new EntAuthorMapper(voAuthorBook);
         EntAuthor update = authorStorageService.update(
                 EntAuthorMapper.getEntity(),

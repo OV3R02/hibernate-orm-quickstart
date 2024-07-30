@@ -1,6 +1,6 @@
 package comm.primeurad.arches.library.application.mapper;
 
-import comm.primeurad.arches.library.application.vo.VOAuthorBook;
+import comm.primeurad.arches.library.application.vo.VOAuthor;
 import comm.primeurad.arches.library.domain.dto.EntAuthor;
 
 import java.time.LocalDate;
@@ -9,11 +9,11 @@ public class EntAuthorMapper {
 
     private final EntAuthor entAuthor;
 
-    public EntAuthorMapper(VOAuthorBook voAuthorBook) {
+    public EntAuthorMapper(VOAuthor voAuthorBook) {
         this.entAuthor = converted(voAuthorBook);
     }
 
-    public EntAuthor converted(VOAuthorBook voAuthorBook){
+    public EntAuthor converted(VOAuthor voAuthorBook){
         EntAuthor entAuthor1 = new EntAuthor();
         entAuthor1.setName(voAuthorBook.getName());
         entAuthor1.setSurname(voAuthorBook.getSurname());

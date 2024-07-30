@@ -1,10 +1,10 @@
 package comm.primeurad.arches.library.application.vo;
 
-import java.math.BigDecimal;
+import java.util.List;
 
-public class VOAuthorBook {
+public class VOAuthor {
 
-    // Variables of VOAuthor class
+    // Variables of VOAuthorMapper class
 
     private String name;
     private String surname;
@@ -15,17 +15,9 @@ public class VOAuthorBook {
     private String phoneNumber;
     private String idAuthor;
     private String sex;
+    private List<VOBook> voBookList;
 
-    // Variables of VOBook class
-
-    private String idBook;
-    private String title;
-    private String pub_house;
-    private String type;
-    private BigDecimal price;
-    private String description;
-
-    // getters and setters for VOAuthor class
+    // getters and setters for VOAuthorMapper class
 
     public String getName() {
         return name;
@@ -99,53 +91,11 @@ public class VOAuthorBook {
         this.sex = sex;
     }
 
-    // getters and setters of VOBook class
-
-    public String getIdBook() {
-        return idBook;
+    public List<VOBook> getVoBookList() {
+        return voBookList;
     }
 
-    public void setIdBook(String idBook) {
-        this.idBook = idBook;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getPub_house() {
-        return pub_house;
-    }
-
-    public void setPub_house(String pub_house) {
-        this.pub_house = pub_house;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setVoBookList(List<VOBook> voBookList) {
+        this.voBookList = voBookList;
     }
 }

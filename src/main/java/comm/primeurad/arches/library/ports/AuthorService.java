@@ -1,16 +1,16 @@
 package comm.primeurad.arches.library.ports;
 
-import comm.primeurad.arches.library.application.vo.VOAuthorBook;
+import comm.primeurad.arches.library.application.vo.VOAuthor;
 
 import java.util.List;
 
 public interface AuthorService {
 
 
-    VOAuthorBook create (VOAuthorBook voAuthorBook);
-    List<VOAuthorBook> getAll ();
-    VOAuthorBook getSingle (String id);
-    VOAuthorBook update (VOAuthorBook voAuthorBook, String id);
+    VOAuthor create (VOAuthor voAuthorBook);
+    List<VOAuthor> getAll ();
+    VOAuthor getSingle (String id);
+    VOAuthor update (VOAuthor voAuthorBook, String id);
     void delete (String id);
 
 }

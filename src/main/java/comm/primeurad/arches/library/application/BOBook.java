@@ -2,9 +2,8 @@ package comm.primeurad.arches.library.application;
 
 import comm.primeurad.arches.library.application.mapper.EntBookMapper;
 import comm.primeurad.arches.library.application.mapper.StringConverter;
-import comm.primeurad.arches.library.application.mapper.VOAuthorMapper;
 import comm.primeurad.arches.library.application.mapper.VOBookMapper;
-import comm.primeurad.arches.library.application.vo.VOAuthorBook;
+import comm.primeurad.arches.library.application.vo.VOBook;
 import comm.primeurad.arches.library.domain.dto.EntBook;
 import comm.primeurad.arches.library.ports.BookService;
 import comm.primeurad.arches.library.ports.BookStorageService;
@@ -21,7 +20,7 @@ public class BOBook implements BookService {
     BookStorageService bookStorageService;
 
     @Override
-    public VOAuthorBook create(VOAuthorBook voBook) {
+    public VOBook create(VOBook voBook) {
         if (voBook.getIdBook()!=null){
             throw new BOBookException("idBook must be null!");
         }
@@ -42,9 +41,9 @@ public class BOBook implements BookService {
     }
 
     @Override
-    public List<VOAuthorBook> getAll() {
+    public List<VOBook> getAll() {
         List<EntBook> allBooks = bookStorageService.getAll();
-        List<VOAuthorBook> voBooksList = new ArrayList<>();
+        List<VOBook> voBooksList = new ArrayList<>();
 
         for (EntBook entBook : allBooks) {
             VOBookMapper voBookMapper = new VOBookMapper(entBook);
@@ -54,7 +53,7 @@ public class BOBook implements BookService {
     }
 
     @Override
-    public VOAuthorBook getSingle(String id) {
+    public VOBook getSingle(String id) {
         EntBook singleBook = bookStorageService.getSingle(
                 StringConverter.convertFromStringToInteger(id));
         VOBookMapper voBookMapper = new VOBookMapper(singleBook);
@@ -62,7 +61,7 @@ public class BOBook implements BookService {
     }
 
     @Override
-    public VOAuthorBook update(VOAuthorBook voBook, String id) {
+    public VOBook update(VOBook voBook, String id) {
         EntBookMapper entBookMapper = new EntBookMapper(voBook);
         EntBook update = bookStorageService.update(
                 entBookMapper.getEntity(),

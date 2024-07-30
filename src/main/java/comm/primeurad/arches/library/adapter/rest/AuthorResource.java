@@ -2,7 +2,7 @@ package comm.primeurad.arches.library.adapter.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import comm.primeurad.arches.library.application.vo.VOAuthorBook;
+import comm.primeurad.arches.library.application.vo.VOAuthor;
 import comm.primeurad.arches.library.ports.AuthorService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -27,26 +27,26 @@ public class AuthorResource {
 
     @POST
     @Transactional
-    public Response createAuthor(VOAuthorBook voAuthor) {
+    public Response createAuthor(VOAuthor voAuthor) {
 
         if (voAuthor.getIdAuthor() != null) {
             throw new WebApplicationException("Id was invalidly set on request. ", 422);
         }
-        VOAuthorBook voAuthorSaved = authorService.create(voAuthor);
+        VOAuthor voAuthorSaved = authorService.create(voAuthor);
         return Response.ok(voAuthorSaved).status(201).build();
     }
     
     
 
     @GET
-    public List<VOAuthorBook> get() {
+    public List<VOAuthor> get() {
         return authorService.getAll();
     }
 
     @GET
     @Path("{id}")
-    public VOAuthorBook getSingle(String id) {
-        VOAuthorBook voAuthor = authorService.getSingle(id);
+    public VOAuthor getSingle(String id) {
+        VOAuthor voAuthor = authorService.getSingle(id);
         if (voAuthor == null) {
             throw new WebApplicationException("Author with id of " + id + " does not exist.", 404);
         }
@@ -56,13 +56,13 @@ public class AuthorResource {
     @PUT
     @Path("{id}")
     @Transactional
-    public VOAuthorBook update(String id, VOAuthorBook voFruit) {
+    public VOAuthor update(String id, VOAuthor voFruit) {
 
 
         if (voFruit.getName() == null) {
             throw new WebApplicationException("Author Name was not set on request.", 422);
         }
-        VOAuthorBook newVoAuthor = authorService.update(voFruit, id);
+        VOAuthor newVoAuthor = authorService.update(voFruit, id);
         if (newVoAuthor == null) {
             throw new WebApplicationException("Fruit with id of " + id + " does not exist.", 404);
         }
@@ -74,7 +74,7 @@ public class AuthorResource {
     @Path("{id}")
     @Transactional
     public Response delete(String id) {
-        VOAuthorBook single = authorService.getSingle(id);
+        VOAuthor single = authorService.getSingle(id);
         if (single == null) {
             throw new WebApplicationException("Author with id " + id + " does not exist.", 404);
         }

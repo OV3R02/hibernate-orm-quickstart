@@ -27,8 +27,6 @@ public class EntBook {
     @Column(length = 5, nullable = false)
     private BigDecimal price;
 
-    //@JoinColumn(name = "id")
-    //@OneToMany
     @ManyToOne
     private EntAuthor entAuthor;
 
