@@ -53,6 +53,7 @@ public class BOAuthor implements AuthorService {
         List<VOBook> voBookList = boBook.getVOBooksByVOAuthorId(id);
         voAuthorMapper.getEntity().setVoBookList(voBookList);
 
+
         return  voAuthorMapper.getEntity();
     }
 
