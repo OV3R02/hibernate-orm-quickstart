@@ -1,14 +1,15 @@
-package comm.primeurad.arches.library.domain.dto;
+package comm.primeurad.arches.library.domain;
 
 import comm.primeurad.arches.library.application.BOBookException;
+import comm.primeurad.arches.library.domain.dto.DAOBookException;
+import comm.primeurad.arches.library.domain.dto.EntAuthor;
+import comm.primeurad.arches.library.domain.dto.EntBook;
 import comm.primeurad.arches.library.ports.BookStorageService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @ApplicationScoped
 public class BookDAO implements BookStorageService {

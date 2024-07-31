@@ -1,5 +1,8 @@
-package comm.primeurad.arches.library.domain.dto;
+package comm.primeurad.arches.library.domain;
 
+import comm.primeurad.arches.library.domain.dto.BOAuthorException;
+import comm.primeurad.arches.library.domain.dto.DAOBookException;
+import comm.primeurad.arches.library.domain.dto.EntAuthor;
 import comm.primeurad.arches.library.ports.AuthorStorageService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
