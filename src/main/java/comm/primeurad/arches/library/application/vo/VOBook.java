@@ -1,28 +1,27 @@
 package comm.primeurad.arches.library.application.vo;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 public class VOBook {
 
     // Variables of VOBook class
 
-    private String idBook;
+    private String id;
     private String title;
-    private String pub_house;
+    private String pubHouse;
     private String type;
     private BigDecimal price;
     private String description;
-    private List<VOAuthor> voAuthorList;
+    private VOAuthor voAuthor;
 
     // getters and setters of VOBook class
 
-    public String getIdBook() {
-        return idBook;
+    public String getId() {
+        return id;
     }
 
-    public void setIdBook(String idBook) {
-        this.idBook = idBook;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -33,12 +32,12 @@ public class VOBook {
         this.title = title;
     }
 
-    public String getPub_house() {
-        return pub_house;
+    public String getPubHouse() {
+        return pubHouse;
     }
 
-    public void setPub_house(String pub_house) {
-        this.pub_house = pub_house;
+    public void setPubHouse(String pubHouse) {
+        this.pubHouse = pubHouse;
     }
 
     public String getType() {
@@ -65,11 +64,11 @@ public class VOBook {
         this.description = description;
     }
 
-    public List<VOAuthor> getVoAuthorList() {
-        return voAuthorList;
+    public VOAuthor getVoAuthor() {
+        return voAuthor;
     }
 
-    public void setVoAuthorList(List<VOAuthor> voAuthorList) {
-        this.voAuthorList = voAuthorList;
+    public void setVoAuthor(VOAuthor voAuthor) {
+        this.voAuthor = voAuthor;
     }
 }

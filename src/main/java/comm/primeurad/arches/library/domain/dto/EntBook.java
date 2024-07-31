@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "known_books")
 @NamedQuery(name = "Books.findAll", query = "SELECT b FROM EntBook b ORDER BY b.title", hints = @QueryHint(name = "org.hibernate.cacheable", value = "true"))
+
 @Cacheable
 public class EntBook {
 

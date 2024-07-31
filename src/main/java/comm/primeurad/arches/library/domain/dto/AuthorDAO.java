@@ -24,7 +24,7 @@ public class AuthorDAO implements AuthorStorageService {
 
     @Override
     public List<EntAuthor> getAll() {
-        return entityManager.createNamedQuery("Author.findAll", EntAuthor.class).getResultList();
+        return entityManager.createNamedQuery("Authors.findAll", EntAuthor.class).getResultList();
     }
 
     @Override

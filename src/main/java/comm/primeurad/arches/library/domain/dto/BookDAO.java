@@ -6,7 +6,9 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @ApplicationScoped
 public class BookDAO implements BookStorageService {
@@ -38,7 +40,7 @@ public class BookDAO implements BookStorageService {
 
         EntBook newEntBook = entityManager.find(EntBook.class, id);
 
-        if (newEntBook.getId()==null) {
+        if (newEntBook==null) {
             throw new DAOBookException("Book not found!");
         }
         newEntBook.setTitle(entBook.getTitle());
@@ -58,4 +60,13 @@ public class BookDAO implements BookStorageService {
         entityManager.remove(entity);
         System.out.println("Book successfully removed!");
     }
+
+    @Override
+    public List<EntBook> findAllBooksByAuthor(EntAuthor entAuthor){
+        return  entityManager
+                .createQuery("SELECT b FROM EntBook b WHERE b.entAuthor = :entAuthor", EntBook.class)
+                .setParameter("entAuthor", entAuthor).getResultList();
+    }
+
 }
+

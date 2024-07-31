@@ -3,6 +3,7 @@ package comm.primeurad.arches.library.adapter.rest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import comm.primeurad.arches.library.application.vo.VOBook;
+import comm.primeurad.arches.library.ports.AuthorService;
 import comm.primeurad.arches.library.ports.BookService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -23,15 +24,18 @@ public class BookResource {
     @Inject
     BookService bookService;
 
-    @POST
-    @Transactional
-    public Response createBook(VOBook voBook) {
+    @Inject
+    AuthorService authorService;
 
-        if (voBook.getIdBook() != null) {
+    @POST
+    @Path("{id}")
+    @Transactional
+    public Response createBook(VOBook voBook, String id) {
+
+        if (voBook.getId() != null) {
             throw new WebApplicationException("Id was invalidly set on request. ", 422);
         }
-        VOBook voBookSaved;
-        voBookSaved = bookService.create(voBook);
+        VOBook voBookSaved = bookService.create(voBook, id);
         return Response.ok(voBookSaved).status(201).build();
     }
 
@@ -46,8 +50,8 @@ public class BookResource {
     @Path("{id}")
     public VOBook getSingle(String id) {
         VOBook voAuthorBook = bookService.getSingle(id);
-        if (voAuthorBook.getIdBook() == null) {
-            throw new WebApplicationException("Fruit with id of " + id + " does not exist.", 404);
+        if (voAuthorBook.getId() == null) {
+            throw new WebApplicationException("Book with id of " + id + " does not exist.", 404);
         }
         return voAuthorBook;
     }
@@ -59,11 +63,11 @@ public class BookResource {
 
 
         if (voAuthorBook.getTitle() == null) {
-            throw new WebApplicationException("Fruit Name was not set on request.", 422);
+            throw new WebApplicationException("Book Name was not set on request.", 422);
         }
         VOBook newVoBook = bookService.update(voAuthorBook, id);
         if (newVoBook == null) {
-            throw new WebApplicationException("Fruit with id of " + id + " does not exist.", 404);
+            throw new WebApplicationException("Book with id of " + id + " does not exist.", 404);
         }
         return newVoBook;
     }
@@ -76,7 +80,7 @@ public class BookResource {
         bookService.delete(id);
         VOBook single = bookService.getSingle(id);
         if (single == null) {
-            throw new WebApplicationException("Fruit with id of " + id + " does not exist.", 404);
+            throw new WebApplicationException("Book with id of " + id + " does not exist.", 404);
         }
         return Response.status(204).build();
     }

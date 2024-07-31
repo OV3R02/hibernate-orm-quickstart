@@ -29,7 +29,7 @@ public class AuthorResource {
     @Transactional
     public Response createAuthor(VOAuthor voAuthor) {
 
-        if (voAuthor.getIdAuthor() != null) {
+        if (voAuthor.getId() != null) {
             throw new WebApplicationException("Id was invalidly set on request. ", 422);
         }
         VOAuthor voAuthorSaved = authorService.create(voAuthor);
@@ -58,13 +58,12 @@ public class AuthorResource {
     @Transactional
     public VOAuthor update(String id, VOAuthor voFruit) {
 
-
         if (voFruit.getName() == null) {
             throw new WebApplicationException("Author Name was not set on request.", 422);
         }
         VOAuthor newVoAuthor = authorService.update(voFruit, id);
         if (newVoAuthor == null) {
-            throw new WebApplicationException("Fruit with id of " + id + " does not exist.", 404);
+            throw new WebApplicationException("Author must be more than 0, can't be null.", 500);
         }
         return newVoAuthor;
     }

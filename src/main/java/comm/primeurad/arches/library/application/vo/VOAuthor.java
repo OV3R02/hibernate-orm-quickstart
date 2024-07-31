@@ -1,5 +1,6 @@
 package comm.primeurad.arches.library.application.vo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VOAuthor {
@@ -13,9 +14,9 @@ public class VOAuthor {
     private String year;
     private String email;
     private String phoneNumber;
-    private String idAuthor;
+    private String id;
     private String sex;
-    private List<VOBook> voBookList;
+    private List<VOBook> voBookList = new ArrayList<>();
 
     // getters and setters for VOAuthorMapper class
 
@@ -51,12 +52,12 @@ public class VOAuthor {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getIdAuthor() {
-        return idAuthor;
+    public String getId() {
+        return id;
     }
 
-    public void setIdAuthor(String idAuthor) {
-        this.idAuthor = idAuthor;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getMonth() {

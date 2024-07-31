@@ -6,7 +6,9 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "known_authors")
-@NamedQuery(name = "Author.findAll", query = "SELECT a FROM EntAuthor a ORDER BY a.name", hints = @QueryHint(name = "org.hibernate.cacheable", value = "true"))
+@NamedQuery(name = "Authors.findAll", query = "SELECT a FROM EntAuthor a ORDER BY a.name", hints = @QueryHint(name = "org.hibernate.cacheable", value = "true"))
+@NamedQuery(name = "Authors.findAuthorById", query = "SELECT a FROM EntAuthor a WHERE a.id = :id", hints = @QueryHint(name = "org.hibernate.cacheable", value = "true"))
+
 @Cacheable
 public class EntAuthor {
 
@@ -32,9 +34,6 @@ public class EntAuthor {
 
     @Column(length = 13)
     private String number;
-
-   // @ManyToOne
-   // ArrayList<EntBook> entBooksList;
 
     public EntAuthor() {
     }
