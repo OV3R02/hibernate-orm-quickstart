@@ -76,14 +76,16 @@ public class BOBook implements BookService {
 
     @Override
     public VOBook update(VOBook voBook, String id) {
-        EntAuthor entAuthor = authorStorageService.getSingle(StringConverter.convertFromStringToInteger(id));
-        EntBookMapper entBookMapper = new EntBookMapper(voBook, entAuthor);
+        EntBook foundBook = bookStorageService.getSingle(StringConverter.convertFromStringToInteger(id));
+        if (foundBook==null){
+            throw new BOBookException("No book found with id "+id);
+        }
+        EntBook entBookMapper = new EntBookMapper(voBook, foundBook.getEntAuthor()).getEntity();
         EntBook update = bookStorageService.update(
-                entBookMapper.getEntity(),
+                entBookMapper,
                 StringConverter.convertFromStringToInteger(id)
         );
-        VOBookMapper voBookMapper = new VOBookMapper(update);
-        return voBookMapper.getEntity();
+        return new VOBookMapper(update).getEntity();
     }
 
     @Override
@@ -114,6 +116,7 @@ public class BOBook implements BookService {
         List<VOBook> allVOBooksByAuthor = new ArrayList<>();
         for (EntBook entBook : allBooksByAuthor) {
             VOBook voBook = new VOBookMapper(entBook).getEntity();
+            voBook.setVoAuthor(null);
             allVOBooksByAuthor.add(voBook);
         }
 

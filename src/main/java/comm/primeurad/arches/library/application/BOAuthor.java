@@ -34,13 +34,16 @@ public class BOAuthor implements AuthorService {
     @Override
     public List<VOAuthor> getAll() {
         List<EntAuthor> allBooks = authorStorageService.getAll();
-        List<VOAuthor> voBooksList = new ArrayList<>();
+        List<VOAuthor> voAuthors = new ArrayList<>();
 
         for (comm.primeurad.arches.library.domain.dto.EntAuthor EntAuthor : allBooks) {
             VOAuthorMapper voAuthorMapper = new VOAuthorMapper(EntAuthor);
-            voBooksList.add(voAuthorMapper.getEntity());
+            VOAuthor voAuthor = voAuthorMapper.getEntity();
+            List<VOBook> voBookList = boBook.getVOBooksByVOAuthorId(voAuthor.getId());
+            voAuthor.setVoBookList(voBookList);
+            voAuthors.add(voAuthor);
         }
-        return voBooksList;
+        return voAuthors;
     }
 
     @Override
@@ -52,8 +55,6 @@ public class BOAuthor implements AuthorService {
 
         List<VOBook> voBookList = boBook.getVOBooksByVOAuthorId(id);
         voAuthorMapper.getEntity().setVoBookList(voBookList);
-
-
         return  voAuthorMapper.getEntity();
     }
 

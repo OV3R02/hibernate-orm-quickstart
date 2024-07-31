@@ -2,7 +2,6 @@ package comm.primeurad.arches.library.application.mapper;
 
 import comm.primeurad.arches.library.application.vo.VOAuthor;
 import comm.primeurad.arches.library.application.vo.VOBook;
-import comm.primeurad.arches.library.domain.dto.EntAuthor;
 import comm.primeurad.arches.library.domain.dto.EntBook;
 
 public class VOBookMapper {

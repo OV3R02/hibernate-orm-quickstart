@@ -12,14 +12,10 @@ public class EntBookMapper {
     public EntBookMapper(VOBook voBook, EntAuthor entAuthor) {
         this.entBook = converted(voBook, entAuthor);
     }
-//    public EntBookMapper(VOBook voBook) { this.entBook = converted(voBook, entAuthor); }
 
     public EntBook converted(VOBook voBook, EntAuthor entAuthor){
-//    public EntBook converted(VOBook voBook){
 
         EntBook entBook = new EntBook();
-//        EntAuthorMapper entAuthorMapper = new EntAuthorMapper(voAuthor);
-//        entBook.setEntAuthor(entAuthorMapper.getEntity());
         entBook.setEntAuthor(entAuthor);
         entBook.setTitle(voBook.getTitle());
         entBook.setPubHouse(voBook.getPubHouse());

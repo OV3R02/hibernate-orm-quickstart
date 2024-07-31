@@ -11,9 +11,6 @@ import java.util.Optional;
 
 public class VOAuthorMapper {
 
-//    @Inject
-//    BookService bookService;
-
     private final VOAuthor voAuthor;
 
     public VOAuthorMapper(EntAuthor entAuthor) {
@@ -34,9 +31,6 @@ public class VOAuthorMapper {
         voAuthor.setEmail(entAuthor.getMail());
         voAuthor.setPhoneNumber(entAuthor.getNumber());
         voAuthor.setSex(entAuthor.getSex());
-
-//        List<VOBook> voBookList = bookService.getVOBooksByVOAuthorId(voAuthor.getId());
-//        voAuthor.setVoBookList(voBookList);
 
         return voAuthor;
     }

@@ -48,28 +48,26 @@ public class BookResource {
 
     @GET
     @Path("{id}")
-    public VOBook getSingle(String id) {
-        VOBook voAuthorBook = bookService.getSingle(id);
-        if (voAuthorBook.getId() == null) {
+    public Response getSingle(String id) {
+        VOBook voBook = bookService.getSingle(id);
+        if (voBook.getId() == null) {
             throw new WebApplicationException("Book with id of " + id + " does not exist.", 404);
         }
-        return voAuthorBook;
+        return Response.ok(voBook).status(200).build();
     }
 
     @PUT
     @Path("{id}")
     @Transactional
-    public VOBook update(String id, VOBook voAuthorBook) {
-
-
-        if (voAuthorBook.getTitle() == null) {
+    public Response update(String id, VOBook voBook) {
+        if (voBook.getTitle() == null) {
             throw new WebApplicationException("Book Name was not set on request.", 422);
         }
-        VOBook newVoBook = bookService.update(voAuthorBook, id);
+        VOBook newVoBook = bookService.update(voBook, id);
         if (newVoBook == null) {
             throw new WebApplicationException("Book with id of " + id + " does not exist.", 404);
         }
-        return newVoBook;
+        return Response.ok(newVoBook).status(201).build();
     }
 
 
@@ -77,11 +75,11 @@ public class BookResource {
     @Path("{id}")
     @Transactional
     public Response delete(String id) {
-        bookService.delete(id);
         VOBook single = bookService.getSingle(id);
         if (single == null) {
             throw new WebApplicationException("Book with id of " + id + " does not exist.", 404);
         }
+        bookService.delete(id);
         return Response.status(204).build();
     }
 

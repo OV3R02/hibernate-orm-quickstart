@@ -39,24 +39,25 @@ public class AuthorResource {
     
 
     @GET
-    public List<VOAuthor> get() {
-        return authorService.getAll();
+    public Response get() {
+        List<VOAuthor> allAuthors = authorService.getAll();
+        return Response.ok(allAuthors).status(200).build();
     }
 
     @GET
     @Path("{id}")
-    public VOAuthor getSingle(String id) {
+    public Response getSingle(String id) {
         VOAuthor voAuthor = authorService.getSingle(id);
         if (voAuthor == null) {
             throw new WebApplicationException("Author with id of " + id + " does not exist.", 404);
         }
-        return voAuthor;
+        return Response.ok(voAuthor).status(200).build();
     }
 
     @PUT
     @Path("{id}")
     @Transactional
-    public VOAuthor update(String id, VOAuthor voFruit) {
+    public Response update(String id, VOAuthor voFruit) {
 
         if (voFruit.getName() == null) {
             throw new WebApplicationException("Author Name was not set on request.", 422);
@@ -65,7 +66,7 @@ public class AuthorResource {
         if (newVoAuthor == null) {
             throw new WebApplicationException("Author must be more than 0, can't be null.", 500);
         }
-        return newVoAuthor;
+        return Response.ok(newVoAuthor).status(200).build();
     }
 
 

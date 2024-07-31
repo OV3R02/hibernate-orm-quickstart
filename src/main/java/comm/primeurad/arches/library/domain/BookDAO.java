@@ -40,10 +40,11 @@ public class BookDAO implements BookStorageService {
     public EntBook update(EntBook entBook, Integer id) {
 
         EntBook newEntBook = entityManager.find(EntBook.class, id);
-
         if (newEntBook==null) {
             throw new DAOBookException("Book not found!");
         }
+
+        newEntBook.setPubHouse(entBook.getPubHouse());
         newEntBook.setTitle(entBook.getTitle());
         newEntBook.setPrice(entBook.getPrice());
         newEntBook.setEntAuthor(entBook.getEntAuthor());
@@ -59,7 +60,6 @@ public class BookDAO implements BookStorageService {
             throw new RuntimeException("Book with id "+entity.getId()+" not found!");
         }
         entityManager.remove(entity);
-        System.out.println("Book successfully removed!");
     }
 
     @Override
